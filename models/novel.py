@@ -1,5 +1,8 @@
 from mongoengine import *
-from chapter import Chapter
+
+class Chapter(Document):
+    name = StringField()
+    content = StringField()
 
 class Novel(Document):
     name = StringField()
