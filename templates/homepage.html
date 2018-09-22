@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MangaHub</title>
+    {% include 'metal-data.html' %}
 </head>
 <body>
-    <h2>MangaHub</h2>
-    <a href="#">Log in</a>
-    {% for novel in all_novel %}
-    <h4>{{ novel.name }}</h4>
-    {% endfor %}
+    {% include 'homepage/navigation.html' %}
+    
 </body>
 </html>
