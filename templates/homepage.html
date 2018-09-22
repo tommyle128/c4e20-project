@@ -9,6 +9,8 @@
 <body>
     <h2>MangaHub</h2>
     <a href="#">Log in</a>
-    
+    {% for novel in all_novel %}
+    <h4>{{ novel.name }}</h4>
+    {% endfor %}
 </body>
 </html>
