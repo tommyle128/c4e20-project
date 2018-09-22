@@ -1,4 +1,5 @@
 from mongoengine import *
+from chapter import Chapter
 
 class Novel(Document):
     name = StringField()
