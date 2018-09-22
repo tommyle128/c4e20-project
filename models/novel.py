@@ -6,5 +6,5 @@ class Novel(Document):
     illu = StringField()
     tag = ListField()
     introduce = StringField()
-    chapters = List(ReferenceField(Chapter))
+    chapters = ListField(ReferenceField(Chapter))
     
