@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chapter</title>
+</head>
+<body>
+    {% for chapter in all_chapter %}
+        <h4>{{ chapter.name }}</h4>
+        <p>{{ chapter.content }}</p>
+    {% endfor %}
+</body>
+</html>
