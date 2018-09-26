@@ -37,6 +37,34 @@ def test():
 
         return redirect(url_for('login'))
 
+@app.route('/signin', methods=["GET", "POST"])
+def signin():
+    if request.method == "GET":
+        return render_template('signin.html')
+    elif request.method == "POST":
+        form = request.form
+        name = form['name']
+        email = form['email']
+        username = form['username']
+        password = form['password']
+
+        signin = Signin(
+            name=name,
+            email=email,
+            username= username,
+            password=password,
+        )
+    if email != "" and name != "":
+        signin.save()
+        return "Saved"
+    else:
+        if email == "" and name != "":
+            return "You must fill in your email"
+        elif name == "" and email != "":
+            return "You must fill in your fullname"
+        else:
+            return "You must fill in your full name and email"
+
 if __name__ == '__main__':
   app.run(debug=True)
  
