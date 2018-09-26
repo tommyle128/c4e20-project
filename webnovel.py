@@ -20,6 +20,55 @@ def chapter():
     all_chapter = Chapter.objects()
     return render_template('chapter.html', all_chapter = all_chapter)
 
+@app.route('/log_in', methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('log_in.html')
+    elif request.method == 'POST':
+        form = request.form 
+        username = form['username']
+        password = form['password']
+
+        found_user = User.objects(
+            username=username,
+            password=password
+        )
+        if found_user:
+            session['loggedin'] = True
+            user = User.objects.get(username=username)
+            session['user'] = str(user.id)
+            return redirect(url_for('homepage.html'))
+        else:
+            return redirect(url_for('sign_up.html'))
+
+@app.route('/logout')
+def logout():
+    session['loggedin'] = False
+    session.clear()
+    return redirect(url_for('index'))
+
+@app.route('/sign_in', methods=['GET','POST'])
+def sign_in():
+    if request.method == 'GET':
+        return render_template('sign_in.html')
+    elif request.method == 'POST':
+        form = request.form
+        fullname = form['fullname']
+        email = form['email']
+        username = form['username']
+        password = form['password']
+
+        new_user = User(
+            username=username,
+            password=password,
+            email=email,
+            fullname=fullname
+        )
+
+        new_user.save()
+        return redirect(url_for('index'))  
+
+
 if __name__ == '__main__':
   app.run(debug=True)
  
