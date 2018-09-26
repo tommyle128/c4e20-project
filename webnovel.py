@@ -1,9 +1,10 @@
 from flask import *
 import mlab
 from mongoengine import *
-from models.novel import Novel, Chapter
+from models.novel import Novel, Chapter, User
 
 app = Flask(__name__)
+app.secret_key = 'a super super secret key'
 mlab.connect()
 
 @app.route('/')
@@ -20,10 +21,10 @@ def chapter():
     all_chapter = Chapter.objects()
     return render_template('chapter.html', all_chapter = all_chapter)
 
-@app.route('/log_in', methods=['GET','POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('log_in.html')
+        return render_template('login.html')
     elif request.method == 'POST':
         form = request.form 
         username = form['username']
@@ -33,47 +34,62 @@ def login():
             username=username,
             password=password
         )
-        if found_user:
-            session['loggedin'] = True
-            user = User.objects.get(username=username)
-            session['user'] = str(user.id)
-            return redirect(url_for('homepage.html'))
+
+        if username == "":
+            return "Hãy điền tên đăng nhập"
         else:
-            return redirect(url_for('sign_up.html'))
+            if password == "":
+                return "Hãy nhập mật khẩu"
+            else:
+                if found_user:
+                    session['loggedin'] = True
+                    user = User.objects.get(username=username)
+                    session['user'] = str(user.id)
+                    return redirect(url_for('homepage'))
+                else:
+                    return redirect(url_for('signup'))
 
 @app.route('/logout')
 def logout():
     session['loggedin'] = False
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('homepage.html'))
 
-@app.route('/sign_in', methods=['GET','POST'])
-def sign_in():
+@app.route('/signup', methods=['GET','POST'])
+def signup():
     if request.method == 'GET':
-        return render_template('sign_in.html')
+        return render_template('signup.html')
     elif request.method == 'POST':
         form = request.form
-        fullname = form['fullname']
         email = form['email']
         username = form['username']
         password = form['password']
 
-        signin = Signin(
-            name=name,
+        new_user = User(
             email=email,
-            username= username,
+            username=username,
             password=password,
         )
-    if email != "" and name != "":
-        signin.save()
-        return "Saved"
-    else:
-        if email == "" and name != "":
-            return "You must fill in your email"
-        elif name == "" and email != "":
-            return "You must fill in your fullname"
+
+        if email == "":
+            return "Hãy điền email của bạn"
         else:
-            return "You must fill in your full name and email"
+            if username == "":
+                return "Hãy điền tên đăng nhập của bạn"
+            else:
+                if password == "":
+                    return "Hãy điền mật khẩu của bạn"
+                else:
+                    found_user = User.objects(
+                        email=email,
+                        username=username,
+                    )
+                    if found_user:
+                        return "Tài khoản đã tồn tại!"
+                    else:
+                        new_user.save()
+                        return "Đã đăng kí thành công!"
+
 
 if __name__ == '__main__':
   app.run(debug=True)

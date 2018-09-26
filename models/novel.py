@@ -11,4 +11,9 @@ class Novel(Document):
     tag = ListField()
     introduce = StringField()
     chapters = ListField(ReferenceField(Chapter))
+
+class User(Document):
+    username = StringField()
+    password = StringField()
+    email = EmailField()
     

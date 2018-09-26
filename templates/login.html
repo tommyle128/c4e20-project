@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign up</title>
+    <title>Log in</title>
     {% include 'metal-data.html' %}
 </head>
 <body style="height:100px;">
@@ -12,15 +12,14 @@
   <form method="POST">
       <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <label for="exampleFormUsername">Địa chỉ Email</label>
-            <input type="email" class="form-control" id="exampleDropdownFormEmail" name="email">
             <label for="exampleFormUsername">Tên đăng nhập</label>
             <input type="text" class="form-control" id="exampleDropdownFormUsername" name="username">
             <label for="exampleFormPassword">Password</label>
             <input type="password" class="form-control" id="exampleDropdownFormPassword" name="password">
             <br>
-            <button type="submit" class="btn btn-primary">Đăng kí</button>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
           </div>
+          <a class="dropdown-item" href="{{ url_for('signup') }}">Chưa có tài khoản? Đăng kí!</a>
         </div>
   </form>
   
