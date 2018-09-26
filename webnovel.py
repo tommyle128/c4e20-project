@@ -30,6 +30,11 @@ def login():
         username = form['username']
         password = form['password']
 
+@app.route('/signup', methods=["GET", "POST"])
+def signin():
+    if request.method == "GET":
+        return render_template('signup.html')
+    elif request.method == "POST":
         found_user = User.objects(
             username=username,
             password=password
@@ -90,6 +95,28 @@ def signup():
                         new_user.save()
                         return "Đã đăng kí thành công!"
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    search = NovelSearchForm(request.form)
+    if request.method == 'POST':
+        return search_results(search)
+ 
+    return render_template('search.html', form=search)
+
+@app.route('/results')
+def search_results(search):
+    results = []
+    search_string = search.data['search']
+ 
+    if search.data['search'] == '':
+        qry = db_session.query(Album)
+        results = qry.all()
+ 
+    if not results:
+        flash('No results found!')
+        return redirect('/search')
+    else:
+        return render_template('results.html', results=results)
 
 if __name__ == '__main__':
   app.run(debug=True)
