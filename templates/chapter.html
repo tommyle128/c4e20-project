@@ -9,7 +9,7 @@
 <body>
     {% for chapter in all_chapter %}
         <h4>{{ chapter.name }}</h4>
-        <p>{{ chapter.content }}</p>
+        {{ chapter.content|safe }}
     {% endfor %}
 </body>
 </html>

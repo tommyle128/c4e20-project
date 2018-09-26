@@ -10,8 +10,8 @@ mlab.connect()
 def homepage():
     return render_template('homepage.html')
 
-@app.route('/novel')
-def novel():
+@app.route('/<novel>')
+def novel(novel):
     all_novel = Novel.objects()
     return render_template('novel.html', all_novel = all_novel)
 
@@ -58,17 +58,95 @@ def sign_in():
         username = form['username']
         password = form['password']
 
-        new_user = User(
-            username=username,
-            password=password,
+        signin = Signin(
+            name=name,
             email=email,
-            fullname=fullname
+            username= username,
+            password=password,
         )
-
-        new_user.save()
-        return redirect(url_for('index'))  
-
+    if email != "" and name != "":
+        signin.save()
+        return "Saved"
+    else:
+        if email == "" and name != "":
+            return "You must fill in your email"
+        elif name == "" and email != "":
+            return "You must fill in your fullname"
+        else:
+            return "You must fill in your full name and email"
 
 if __name__ == '__main__':
   app.run(debug=True)
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
