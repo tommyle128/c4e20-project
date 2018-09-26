@@ -2,8 +2,10 @@ from flask import *
 import mlab
 from mongoengine import *
 from models.novel import Novel, Chapter
+from searchform import NovelSearchForm
 
 app = Flask(__name__)
+app.secret_key = "a super hyper bust"
 mlab.connect()
 
 @app.route('/')
@@ -51,6 +53,29 @@ def logout():
     session['loggedin'] = False
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    search = NovelSearchForm(request.form)
+    if request.method == 'POST':
+        return search_results(search)
+ 
+    return render_template('search.html', form=search)
+
+@app.route('/results')
+def search_results(search):
+    results = []
+    search_string = search.data['search']
+ 
+    if search.data['search'] == '':
+        qry = db_session.query(Album)
+        results = qry.all()
+ 
+    if not results:
+        flash('No results found!')
+        return redirect('/search')
+    else:
+        return render_template('results.html', results=results)
 
 if __name__ == '__main__':
   app.run(debug=True)
