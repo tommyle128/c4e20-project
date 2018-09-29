@@ -1,12 +1,4 @@
 from mongoengine import *
-from wtforms import Form, StringField, SelectField
- 
-class NovelSearchForm(Form):
-    choices = [('name', 'name'),
-               ('author', 'author'),
-               ('tag', 'tag')]
-    select = SelectField('Search for novel:', choices=choices)
-    search = StringField('')
 
 class Chapter(Document):
     name = StringField()
@@ -24,4 +16,5 @@ class User(Document):
     username = StringField()
     password = StringField()
     email = EmailField()
+    is_admin = BooleanField()
     

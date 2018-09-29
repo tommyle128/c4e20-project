@@ -1,7 +1,8 @@
 from flask import *
 import mlab
 from mongoengine import *
-from models.novel import Novel, Chapter, User, NovelSearchForm
+from models.novel import Novel, Chapter, User
+from models.search import NovelSearchForm
 
 app = Flask(__name__)
 app.secret_key = 'a super super secret key'
@@ -10,6 +11,10 @@ mlab.connect()
 @app.route('/')
 def homepage():
     return render_template('homepage.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
 
 @app.route('/<novel>')
 def novel(novel):
@@ -39,11 +44,13 @@ def login():
             if password == "":
                 return "Hãy nhập mật khẩu"
             else:
-                if found_user:
+                print(found_user)
+                if len(found_user) > 0:
                     session['loggedin'] = True
-                    user = User.objects.get(username=username)
-                    session['user'] = str(user.id)
-                    return redirect(url_for('homepage'))
+                    if found_user[0].is_admin == True:
+                        return redirect(url_for('admin'))
+                    else:
+                        return redirect(url_for('homepage'))
                 else:
                     return redirect(url_for('signup'))
 
@@ -51,7 +58,7 @@ def login():
 def logout():
     session['loggedin'] = False
     session.clear()
-    return redirect(url_for('homepage.html'))
+    return redirect(url_for('homepage'))
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():

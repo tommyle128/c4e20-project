@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MangaHub</title>
     {% include 'metal-data.html' %}
-    <link rel="stylesheet" href="show.css">
 </head>
 <body>
     {% include 'homepage/navigation.html' %}
     <br>    
-    {% include 'homepage/show.html' %}
+    <div class="d-flex flex-column align-items-center justify-content-around bg-warning" style="height:700px;">
+        {% include 'homepage/show_novel.html' %}
+    </div>
     
 </body>
 </html>
