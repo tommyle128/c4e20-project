@@ -7,24 +7,28 @@
     <title>Search Page</title>
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
- 
-    {% from "result.html" import render_field %}
-    <form method=post>
-        <dl>
-            {{ render_field(form.select) }}
-            <p>
-            {{ render_field(form.search) }}
-        </dl>
-        <p><input type=submit value=Search>
-    </form>
+    <div class="card bg-warning" style="width: 30rem;">
+        <div class="card-body">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+        
+            {% from "result.html" import render_field %}
+            <form method=post>
+                <dl>
+                    {{ render_field(form.select) }}
+                    <p>
+                    {{ render_field(form.search) }}
+                </dl>
+                <p><input type=submit value=Search>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

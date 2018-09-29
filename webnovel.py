@@ -2,6 +2,7 @@ from flask import *
 import mlab
 from mongoengine import *
 from models.novel import Novel, Chapter, User
+from models.search import NovelSearchForm
 
 app = Flask(__name__)
 app.secret_key = 'a super super secret key'
