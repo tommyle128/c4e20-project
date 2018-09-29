@@ -1,7 +1,7 @@
 from flask import *
 import mlab
 from mongoengine import *
-from models.novel import Novel, Chapter, User
+from models.novel import Novel, Chapter, User, NovelSearchForm
 
 app = Flask(__name__)
 app.secret_key = 'a super super secret key'
@@ -21,25 +21,18 @@ def chapter():
     all_chapter = Chapter.objects()
     return render_template('chapter.html', all_chapter = all_chapter)
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    if request.method == 'GET':
+    if request.method == "GET":
         return render_template('login.html')
-    elif request.method == 'POST':
-        form = request.form 
+    elif request.method == "POST":
+        form = request.form
         username = form['username']
         password = form['password']
-
-@app.route('/signup', methods=["GET", "POST"])
-def signin():
-    if request.method == "GET":
-        return render_template('signup.html')
-    elif request.method == "POST":
         found_user = User.objects(
             username=username,
-            password=password
+            password=password,
         )
-
         if username == "":
             return "Hãy điền tên đăng nhập"
         else:
