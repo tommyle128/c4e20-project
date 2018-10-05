@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log in</title>
+    {% include 'metal-data.html' %}
+</head>
+<body class="bg-info">
+  {% include 'login/navigation.html' %}
+  <div class="d-flex justify-content-center align-items-center" style="height:500px">
+  <form method="POST">
+      <div class="card bg-warning" style="width: 30rem;">
+          <div class="card-body">
+            <label for="exampleFormUsername">Tên đăng nhập</label>
+            <input type="text" class="form-control" id="exampleDropdownFormUsername" name="username">
+            <label for="exampleFormPassword">Password</label>
+            <input type="password" class="form-control" id="exampleDropdownFormPassword" name="password">
+            <br>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+          </div>
+        </div>
+  </form>  
+  </div>
+</body>
+</html>
