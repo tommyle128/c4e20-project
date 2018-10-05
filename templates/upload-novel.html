@@ -7,8 +7,10 @@
     <title>Novel</title>
 </head>
 <body>
-    {% for novel in all_novel %}
-        <h4>{{ novel.name }}</h4>
+    <button><a href="{{ url_for('new_novel') }}">Upload truyện mới</a></button>
+    <h2>Upload từ truyện có sẵn:</h2>
+    {% for novel in all_novels %}
+        <a href="{{ url_for('chapters', novel_id=novel.id) }}">{{ novel.name }}</a>
     {% endfor %}
 </body>
 </html>

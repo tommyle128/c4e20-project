@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chapter</title>
+</head>
+<body>
+    <h2>{{ chapter.name }}</h2>
+    {{ chapter.content|safe }}
+    <!--!safe khong xoa va cai nay de convert html o database sang text-->
+    
+    {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}">Chương trước</a>
+        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}">Chương sau</a>
+    {% elif chapter_id_previous == "None" %}
+        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}">Chương sau</a>
+    {% elif chapter_id_next == "None" %}
+        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}">Chương trước</a>
+    {% else %}
+    {% endif %}
+    
+    
+</body>
+</html>
