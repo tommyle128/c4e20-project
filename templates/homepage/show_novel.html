@@ -1,0 +1,13 @@
+{% for novel in all_novels %}
+    <div class="card text-white m-3" style="width:22%; height: 300px;">
+    <img class="card-img" style="height:100%;" src="../../static/29512245_710808522585224_8485547141470290090_n.jpg">
+    <div class="card-img-overlay d-flex flex-column justify-content-end">
+        <a href="{{ url_for('chapters', novel_id=novel.id) }}">{{ novel.name }}</a>
+        <p class="card-text">Last updated 3 mins ago</p>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
