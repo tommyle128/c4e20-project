@@ -17,15 +17,15 @@ def homepage():
 def admin():
     return render_template('admin.html')
 
-@app.route('/<novel>')
-def novel(novel):
+@app.route('/novel')
+def novel():
     all_novel = Novel.objects()
-    return render_template('novel.html', all_novel = all_novel)
+    return render_template('novel.html', all_novel=all_novel)
 
 @app.route('/chapter')
 def chapter():
     all_chapter = Chapter.objects()
-    return render_template('chapter.html', all_chapter = all_chapter)
+    return render_template('chapter.html', all_chapter=all_chapter)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
