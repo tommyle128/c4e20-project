@@ -3,21 +3,20 @@ import mlab
 
 mlab.connect()
 
-new_user = User(
-    username = 'man',
-    password = 'man',
-    is_admin = False,
-)
-new_user.save()
-# new_novel = Novel(
-#     name = 'Persona 5',
-#     author = 'Katsuki',
-#     illu = 'game',
-#     tag = ['action','mystery'],
-#     introduce = 'abc',
-#     chapters = []
+# new_user = User(
+#     username = 'man',
+#     password = 'man',
+#     is_admin = False,
 # )
-# new_novel.save()    
+# new_user.save()
+new_novel = Novel(
+    name = 'Persona 5',
+    author = 'Katsuki',
+    tag = ['action','mystery'],
+    introduce = 'abc',
+    chapters = []
+)
+new_novel.save()   
 
 # for i in range(2):
 #     new_chap = Chapter(

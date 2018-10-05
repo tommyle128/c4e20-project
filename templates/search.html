@@ -8,12 +8,7 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    {% include 'navibar/navibar_search.html' %}
     <div class="bg-secondary d-flex justify-content-center align-items-center" style="height:650px;">
         <div>
             <form method="POST">

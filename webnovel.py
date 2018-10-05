@@ -10,7 +10,10 @@ mlab.connect()
 
 @app.route('/')
 def homepage():
-    return render_template('homepage.html')
+    all_novel = Novel.objects()
+    return render_template(
+        'homepage.html',
+        all_novel=all_novel)
 
 @app.route('/admin')
 def admin():
@@ -37,7 +40,7 @@ def login():
 
         found_user = User.objects(
             username=username,
-            password=password
+            password=password,
         )
 
         if username == "":
@@ -51,7 +54,8 @@ def login():
                     if found_user[0].is_admin == True:
                         return redirect(url_for('admin'))
                     else:
-                        return redirect(url_for('homepage'))
+                        all_novel = Novel.objects()
+                        return render_template('user/homepage.html',all_novel=all_novel)
                 else:
                     return redirect(url_for('signup'))
 
@@ -127,6 +131,15 @@ def search_results(search):
         #     return redirect('/search')
         # else:
         #     return render_template('results.html', results=results)
+
+@app.route('/user/<user_id>')
+def user(user_id):
+    user = User.objects.with_id(user_id)
+    return render_template('user.html',user=user)
+
+@app.route('/user_homepage')
+def user_homepage():
+    return render_template('user/homepage.html')
 
 if __name__ == '__main__':
   app.run(debug=True)

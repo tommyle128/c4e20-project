@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Novel</title>
+    {% include 'metal-data.html' %}
 </head>
 <body>
-    {% for novel in all_novel %}
-        <h4>{{ novel.name }}</h4>
-    {% endfor %}
+    {% include 'navibar/navibar_search.html' %}
+    <div>
+        {% for novel in all_novel %}
+            <h4>{{ novel.name }}</h4>
+        {% endfor %}    
+    </div>
+    
 </body>
 </html>
