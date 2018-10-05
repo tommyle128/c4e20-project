@@ -17,4 +17,6 @@ class User(Document):
     password = StringField()
     email = EmailField()
     is_admin = BooleanField()
-    
+
+class SearchNovel(Document):
+    name =StringField()    

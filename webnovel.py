@@ -1,8 +1,8 @@
 from flask import *
 import mlab
 from mongoengine import *
-from models.novel import Novel, Chapter, User
-from models.search import NovelSearchForm
+from models.novel import Novel, Chapter, User, SearchNovel
+
 
 app = Flask(__name__)
 app.secret_key = 'a super super secret key'
@@ -98,26 +98,35 @@ def signup():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    search = NovelSearchForm(request.form)
-    if request.method == 'POST':
-        return search_results(search)
- 
-    return render_template('search.html', form=search)
+    if request.method == 'GET':
+        return render_template('search.html')
+    elif request.method == 'POST':
+        form = request.form
+        search_querry = form['name']
+        
+        all_novels = Novel.objects()
+        for i in range(len(all_novels)):
+            
+            if search_querry.lower() in all_novels[i]['name'].lower():
+                result_name = all_novels[i]['name']
+                result_link = all
+            # else:
+            #     return "Not found"
 
 @app.route('/results')
 def search_results(search):
-    results = []
     search_string = search.data['search']
- 
-    if search.data['search'] == '':
-        qry = db_session.query(Album)
-        results = qry.all()
- 
-    if not results:
-        flash('No results found!')
-        return redirect('/search')
-    else:
-        return render_template('results.html', results=results)
+    NovelList = Novel.objects()
+    for i in range(len(NovelList)):
+        if search_string == Novel.objects(name = search_string):
+            return "yes"
+        
+    
+        # if not results:
+        #     flash('No results found!')
+        #     return redirect('/search')
+        # else:
+        #     return render_template('results.html', results=results)
 
 if __name__ == '__main__':
   app.run(debug=True)
