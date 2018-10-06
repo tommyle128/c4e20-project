@@ -22,8 +22,8 @@ def homepage():
 def chapters(novel_id):
     novel = Novel.objects.with_id(novel_id)
     all_chapters = novel['chapters']
-       
-    return render_template('chapters.html', all_chapters=all_chapters, novel_id=novel_id)
+    
+    return render_template('chapters.html', all_chapters=all_chapters, novel=novel)
     
 @app.route('/content/<novel_id>/<chapter_id>')
 def content(chapter_id, novel_id):
@@ -144,11 +144,11 @@ def search():
             
             if search_querry.lower() in all_novels[i]['name'].lower():
                 result_name = all_novels[i]['name']
-                result_link = all
-            # else:
-            #     return "Not found"
+                return render_template('result.html')
+            else:
+                return "Not found"
 
-@app.route('/results')
+@app.route('/result')
 def search_results(search):
     search_string = search.data['search']
     NovelList = Novel.objects()
@@ -184,11 +184,21 @@ def new_novel():
         return render_template('new-novel.html')
     elif request.method == "POST":
         test_form = request.form
-        return "OK"
+                
+        new_novel = Novel(
+            name = test_form['name'],
+            author = test_form['author'],
+            tag = [test_form['tag1'], test_form['tag2'], test_form['tag3']],
+            introduce = test_form['introduce'],
+            chapters = []
+        )
+        new_novel.save()
+          
+        return redirect(url_for('new_chapter', novel_id=new_novel.id))
     
 
-@app.route('/new-chapter', methods=["GET", "POST"])
-def upload_chapter():
+@app.route('/new-chapter/<novel_id>', methods=["GET", "POST"])
+def new_chapter(novel_id):
     if request.method == "GET":
         return render_template('new-chapter.html')
     elif request.method == "POST":
@@ -202,12 +212,11 @@ def upload_chapter():
         )
         new_chapter.save()
 
-        return redirect(url_for('login'))
+        novel = Novel.objects.with_id(novel_id)
+        novel.update(push__chapters = new_chapter)
 
-   
+        return redirect(url_for('upload_novel'))
     
-        
-
 
 if __name__ == '__main__':
   app.run(debug=True)

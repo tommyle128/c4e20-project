@@ -8,7 +8,16 @@
     
 </head>
 <body>
-    
+    <h2>{{ novel.name }}</h2>
+    <p>Tác giả: {{ novel.author }}</p>
+    <p>Giới thiệu: {{ novel.introduce }}</p>
+    <p>Tag:
+        {% for tag in novel.tag %}
+        {{ tag }}
+        {{ "," if not loop.last }}
+        {% endfor %}
+    </p> 
+
     {% for chapter in all_chapters %}
         <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel_id) }}">{{ chapter.name }}</a>
     {% endfor %}
