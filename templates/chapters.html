@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chapter</title>
-    
+    {% include 'metal-data.html' %}
 </head>
 <body>
+<<<<<<< HEAD
     <h2>{{ novel.name }}</h2>
     <p>Tác giả: {{ novel.author }}</p>
     <p>Giới thiệu: {{ novel.introduce }}</p>
@@ -21,5 +22,41 @@
     {% for chapter in all_chapters %}
         <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel.id) }}">{{ chapter.name }}</a>
     {% endfor %}
+=======
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="row justify-content-center" style="background-color: rgb(238, 222, 203)">
+        <div class="col col-md-9">
+            <br>
+            <div class="text-center">
+                <h2>{{ novel.name }}</h2>    
+            </div>
+            <!-- <br>
+            <img src="../static/Ảnh bìa/Genjitsushugi Yuusha no Oukoku Saikenki - bìa.jpg" style="width:939.5px;">
+            <br> -->
+            <div style="font-size: 20px;">
+                <p>Tác giả: {{ novel.author }}</p>
+                <p>Tag:
+                    {% for tag in novel.tag %}
+                    {{ tag }}
+                    {{ "," if not loop.last }}
+                    {% endfor %}
+                </p>  
+                <p>Giới thiệu: {{ novel.introduce }}</p>   
+            </div>
+            <div class="text-center" style="font-size: 30px;">
+                <p>Danh Sách chương:</p>
+                {% for chapter in all_chapters %}
+                <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel_id) }}">{{ chapter.name }}</a>
+                <br>
+                {% endfor %} 
+            </div>  
+        </div>    
+    </div> 
+>>>>>>> bb5272ad30b3f7113f4ad20dd68c9ad0e968f98e
 </body>
 </html>

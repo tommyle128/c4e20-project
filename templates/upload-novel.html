@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Novel</title>
+    {% include 'metal-data.html' %}
 </head>
 <body>
-    <button><a href="{{ url_for('new_novel') }}">Upload truyện mới</a></button>
-    <h2>Upload từ truyện có sẵn:</h2>
-    {% for novel in all_novels %}
-        <a href="{{ url_for('chapters', novel_id=novel.id) }}">{{ novel.name }}</a>
-    {% endfor %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="row justify-content-center" style="background-color: rgb(243, 235, 225); height: 650px">
+        <div class="col col-md-9">
+            <button><a href="{{ url_for('new_novel') }}">Upload truyện mới</a></button>
+            <br><br>
+            <h2>Upload từ truyện có sẵn:</h2>
+            {% for novel in all_novels %}
+                <a href="{{ url_for('new_chapter', novel_id=novel.id) }}">{{ novel.name }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    </div>           
 </body>
 </html>
