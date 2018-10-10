@@ -8,6 +8,21 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
+<<<<<<< HEAD
+    <h2>{{ novel.name }}</h2>
+    <p>Tác giả: {{ novel.author }}</p>
+    <p>Giới thiệu: {{ novel.introduce }}</p>
+    <p>Tag:
+        {% for tag in novel.tag %}
+        {{ tag }}
+        {{ "," if not loop.last }}
+        {% endfor %}
+    </p> 
+
+    {% for chapter in all_chapters %}
+        <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel.id) }}">{{ chapter.name }}</a>
+    {% endfor %}
+=======
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
         <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,5 +57,6 @@
             </div>  
         </div>    
     </div> 
+>>>>>>> bb5272ad30b3f7113f4ad20dd68c9ad0e968f98e
 </body>
 </html>

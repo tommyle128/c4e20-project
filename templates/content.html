@@ -30,19 +30,19 @@
                         </div> 
                     </div>
                     
-                {% elif chapter_id_previous == "None" %}
+                {% elif chapter_id_next == "None" %}
                     <div class="d-flex justify-content-between">
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
                         </div>
                     </div>    
-                {% elif chapter_id_next == "None" %}
+                {% elif chapter_id_previous == "None" %}
                 <div class="d-flex justify-content-between">
                     <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
                     </div>
                 </div>        
-                {% else %}
+                
                 {% endif %}    
             </div>
             <br>
@@ -61,23 +61,23 @@
                         </div> 
                     </div>
                     
-                {% elif chapter_id_previous == "None" %}
+                {% elif chapter_id_next == "None" %}
                     <div class="d-flex justify-content-between">
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
                         </div>
                     </div>    
-                {% elif chapter_id_next == "None" %}
+                {% elif chapter_id_previous == "None" %}
                 <div class="d-flex justify-content-between">
                     <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
                     </div>
                 </div>        
-                {% else %}
+                
                 {% endif %}     
             </div>   
         </div>    
     </div>
-    
+    <a href="{{ url_for('chapters', novel_id=novel_id) }}">Tất cả các chương</a>
 </body>
 </html>
