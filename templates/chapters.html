@@ -36,7 +36,7 @@
             <div class="text-center" style="font-size: 30px;">
                 <p>Danh Sách chương:</p>
                 {% for chapter in all_chapters %}
-                <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel_id) }}">{{ chapter.name }}</a>
+                <a href="{{ url_for('content', chapter_id=chapter.id, novel_id=novel.id) }}">{{ chapter.name }}</a>
                 <br>
                 {% endfor %} 
             </div>  
