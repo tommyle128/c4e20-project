@@ -1,17 +1,14 @@
 from flask import *
 import mlab
 from mongoengine import *
-from models.novel import Novel, Chapter, User, SearchNovel
-
+from models.novel import Novel, Chapter, User
+from models.search import NovelSearchForm
 
 app = Flask(__name__)
 app.secret_key = 'a super super secret key'
 mlab.connect()
 
 
-@app.route('/admin')
-def admin():
-    return render_template('admin.html')
 
 @app.route('/')
 def homepage():
@@ -32,7 +29,7 @@ def content(chapter_id, novel_id):
     novel = Novel.objects.with_id(novel_id)
     all_chapters = novel['chapters']
 
-    for i in range (len(all_chapters)):
+    for i in range(len(all_chapters)):
         if str(all_chapters[i].id) == chapter_id:
             order_number = i
             if order_number == 0:
@@ -69,26 +66,33 @@ def login():
         username = form['username']
         password = form['password']
 
-        found_user = User.objects(
-            username=username,
-            password=password,
-        )
-
         if username == "":
             return "Hãy điền tên đăng nhập"
         else:
             if password == "":
                 return "Hãy nhập mật khẩu"
             else:
+                found_user = User.objects(
+                    username=username,
+                    password=password,
+                )
                 if len(found_user) > 0:
                     session['loggedin'] = True
+                    user_id = found_user[0].id
+                    user_name = found_user[0].username
+                    all_novels = Novel.objects()
                     if found_user[0].is_admin == True:
-                        return redirect(url_for('admin'))
+                        return render_template('admin/homepage.html',all_novels=all_novels)
                     else:
-                        all_novel = Novel.objects()
-                        return render_template('user/homepage.html',all_novel=all_novel)
+                        return render_template('user/homepage.html',all_novels=all_novels,user_id=user_id,user_name=user_name)
                 else:
                     return redirect(url_for('signup'))
+
+@app.route('/user/<user_id>')
+def user(user_id):
+    user = User.objects.with_id(user_id)
+    all_novel = user['novels'] 
+    return render_template('user.html',user=user,user_id=user_id,all_novel=all_novel)
 
 @app.route('/logout')
 def logout():
@@ -131,6 +135,10 @@ def signup():
                         new_user.save()
                         return "Đã đăng kí thành công!"
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'GET':
@@ -150,23 +158,20 @@ def search():
 
 @app.route('/result')
 def search_results(search):
+    results = []
     search_string = search.data['search']
-    NovelList = Novel.objects()
-    for i in range(len(NovelList)):
-        if search_string == Novel.objects(name = search_string):
-            return "yes"
-        
-    
-        # if not results:
-        #     flash('No results found!')
-        #     return redirect('/search')
-        # else:
-        #     return render_template('results.html', results=results)
+ 
+    if search.data['search'] == '':
+        qry = db_session.query(Album)
+        results = qry.all()
+ 
+    if not results:
+        flash('No results found!')
+        return redirect('/search')
+    else:
+        return render_template('results.html', results=results)
 
-@app.route('/user/<user_id>')
-def user(user_id):
-    user = User.objects.with_id(user_id)
-    return render_template('user.html',user=user)
+
 
 @app.route('/user_homepage')
 def user_homepage():
@@ -190,7 +195,9 @@ def new_novel():
             author = test_form['author'],
             tag = [test_form['tag1'], test_form['tag2'], test_form['tag3']],
             introduce = test_form['introduce'],
-            chapters = []
+            chapters = [],
+            avatar_img = test_form['avatar_img'],
+            bg_img = test_form['bg_img']
         )
         new_novel.save()
           
@@ -214,9 +221,24 @@ def new_chapter(novel_id):
 
         novel = Novel.objects.with_id(novel_id)
         novel.update(push__chapters = new_chapter)
-
         return redirect(url_for('upload_novel'))
-    
+
+@app.route('/delete/<user_id>/<novel_id>')
+def delete(user_id,novel_id):
+    user = User.objects.with_id(user_id)
+    novel_to_delete = Novel.objects.with_id(novel_id)
+    all_novel = user['novels']
+    User.objects(id = user_id).update_one(pull__novels = novel_to_delete)
+    if novel_to_delete is not None:
+        novel_to_delete.delete()
+        user = User.objects.with_id(user_id)
+        all_novel = user['novels']
+        return render_template('user.html',user=user,user_id=user_id,all_novel=all_novel,novel_id=novel_id)
+    else:
+        return 'Novel not found'
+
+        
+
 
 if __name__ == '__main__':
   app.run(debug=True)

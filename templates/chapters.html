@@ -20,9 +20,9 @@
             <div class="text-center">
                 <h2>{{ novel.name }}</h2>    
             </div>
-            <!-- <br>
-            <img src="../static/Ảnh bìa/Genjitsushugi Yuusha no Oukoku Saikenki - bìa.jpg" style="width:939.5px;">
-            <br> -->
+            <br>
+            <img src="{{ novel.bg_img }}" style="width:939.5px;">
+            <br>
             <div style="font-size: 20px;">
                 <p>Tác giả: {{ novel.author }}</p>
                 <p>Tag:
@@ -42,7 +42,5 @@
             </div>  
         </div>    
     </div> 
-
-    <p><a href="{{ url_for('new_chapter', novel_id=novel.id) }}">Upload chương mới</a></p>
 </body>
 </html>

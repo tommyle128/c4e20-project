@@ -10,7 +10,8 @@ class Novel(Document):
     tag = ListField()
     introduce = StringField()
     chapters = ListField(ReferenceField(Chapter))
-   
+    avatar_img = URLField()
+    bg_img = URLField()
 
     
 class User(Document):
@@ -18,9 +19,6 @@ class User(Document):
     password = StringField()
     email = EmailField()
     is_admin = BooleanField()
-
-class SearchNovel(Document):
-    name =StringField()    
     novels = ListField(ReferenceField(Novel))
 
 class New(Document):

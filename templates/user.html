@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Người dùng</title>
+    <title>User</title>
+    {% include 'metal-data.html' %}
 </head>
 <body>
-    <h1>Người dùng</h1>
+    {% include 'user/navigation.html' %} 
+    <h5>{{ user.username }}</h5>
+    <table border="1px">
+        <thead>
+            <th>STT</th>
+            <th>Truyện</th>
+            <th>Chỉnh sửa</th>
+        </thead>
+        <tbody>
+            {% for novel in all_novel %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ novel.name }}</td>
+                    <td>
+                        <a href="#">Sửa</a>
+                        <a href="{{ url_for('delete', novel_id=novel.id,user_id=user_id) }}">Xoá</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</tbody>
+</table>
 </body>
 </html>
