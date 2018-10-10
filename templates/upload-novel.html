@@ -13,10 +13,16 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link text-light" href="{{ url_for('new_novel') }}">New novel</a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="row justify-content-center" style="background-color: rgb(243, 235, 225); height: 650px">
         <div class="col col-md-9">
-            <button><a href="{{ url_for('new_novel') }}">Upload truyện mới</a></button>
             <br><br>
             <h2>Upload từ truyện có sẵn:</h2>
             {% for novel in all_novels %}
