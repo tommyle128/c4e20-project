@@ -5,22 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chapter</title>
+    {% include 'metal-data.html' %}
 </head>
 <body>
-    <h2>{{ chapter.name }}</h2>
-    {{ chapter.content|safe }}
-    <!--!safe khong xoa va cai nay de convert html o database sang text-->
-    
-    {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
-        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}">Chương trước</a>
-        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}">Chương sau</a>
-    {% elif chapter_id_previous == "None" %}
-        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}">Chương sau</a>
-    {% elif chapter_id_next == "None" %}
-        <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}">Chương trước</a>
-    {% else %}
-    {% endif %}
-    
-    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a class="nav-link text-light" href="{{ url_for('chapters', novel_id=novel_id) }}">Tất cả các chương</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row justify-content-center" style="background-color: rgb(238, 222, 203)">
+        <div class="col col-md-9">
+            <div class="text-center"> 
+                <h2>{{ chapter.name }}</h2>    
+            </div>
+            <div>
+                {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div> 
+                    </div>
+                    
+                {% elif chapter_id_next == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                    </div>    
+                {% elif chapter_id_previous == "None" %}
+                <div class="d-flex justify-content-between">
+                    <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                    </div>
+                </div>        
+                
+                {% endif %}    
+            </div>
+            <br>
+            <div>
+                <h5>{{ chapter.content|safe }}</h5>
+                <!--!safe khong xoa va cai nay de convert html o database sang text-->    
+            </div>
+            <div>
+                    {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div> 
+                    </div>
+                    
+                {% elif chapter_id_next == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                    </div>    
+                {% elif chapter_id_previous == "None" %}
+                <div class="d-flex justify-content-between">
+                    <div>
+                            <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                    </div>
+                </div>        
+                
+                {% endif %}     
+            </div>   
+        </div>    
+    </div>
 </body>
 </html>

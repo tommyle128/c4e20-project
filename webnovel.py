@@ -19,8 +19,8 @@ def homepage():
 def chapters(novel_id):
     novel = Novel.objects.with_id(novel_id)
     all_chapters = novel['chapters']
-       
-    return render_template('chapters.html', all_chapters=all_chapters, novel_id=novel_id)
+    
+    return render_template('chapters.html', all_chapters=all_chapters, novel=novel)
     
 @app.route('/content/<novel_id>/<chapter_id>')
 def content(chapter_id, novel_id):
@@ -141,13 +141,22 @@ def admin():
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    search = NovelSearchForm(request.form)
-    if request.method == 'POST':
-        return search_results(search)
- 
-    return render_template('search.html', form=search)
+    if request.method == 'GET':
+        return render_template('search.html')
+    elif request.method == 'POST':
+        form = request.form
+        search_querry = form['name']
+        
+        all_novels = Novel.objects()
+        for i in range(len(all_novels)):
+            
+            if search_querry.lower() in all_novels[i]['name'].lower():
+                result_name = all_novels[i]['name']
+                return render_template('result.html')
+            else:
+                return "Not found"
 
-@app.route('/results')
+@app.route('/result')
 def search_results(search):
     results = []
     search_string = search.data['search']
@@ -180,11 +189,21 @@ def new_novel():
         return render_template('new-novel.html')
     elif request.method == "POST":
         test_form = request.form
-        return "OK"
+                
+        new_novel = Novel(
+            name = test_form['name'],
+            author = test_form['author'],
+            tag = [test_form['tag1'], test_form['tag2'], test_form['tag3']],
+            introduce = test_form['introduce'],
+            chapters = []
+        )
+        new_novel.save()
+          
+        return redirect(url_for('new_chapter', novel_id=new_novel.id))
     
 
-@app.route('/new-chapter', methods=["GET", "POST"])
-def upload_chapter():
+@app.route('/new-chapter/<novel_id>', methods=["GET", "POST"])
+def new_chapter(novel_id):
     if request.method == "GET":
         return render_template('new-chapter.html')
     elif request.method == "POST":
@@ -198,7 +217,8 @@ def upload_chapter():
         )
         new_chapter.save()
 
-        return redirect(url_for('login'))
+        novel = Novel.objects.with_id(novel_id)
+        novel.update(push__chapters = new_chapter)
 
 @app.route('/delete/<user_id>/<novel_id>')
 def delete(user_id,novel_id):

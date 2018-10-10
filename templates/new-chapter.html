@@ -8,15 +8,28 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
     <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
+    {% include 'metal-data.html' %}
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
+        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
     <form method="POST">
-        <label>Tên đầy đủ:</label>
-        <br>
-        <input type="text" name="name" value="Tên chương">
-        <br>
-        <textarea name="editor1"></textarea>
-        <button>Submit</button>
+        <div class="row justify-content-center" style="background-color: rgb(243, 235, 225); height: 650px">
+            <div class="col col-md-9">
+                <label>Tên đầy đủ:</label>
+                <br>
+                <input type="text" name="name" placeholder="Tên chương">
+                <br>
+                <textarea name="editor1"></textarea>
+                
+                <button type="Submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        
     </form>
 
 
