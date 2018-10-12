@@ -1,6 +1,6 @@
 {% for novel in all_novels %}
     <div class="card text-white m-3" style="width:22%; height: 300px;">
-        <img class="card-img" style="height:100%;" src="../../static/29512245_710808522585224_8485547141470290090_n.jpg">
+        <img class="card-img" style="height:100%;" src="{{ novel.avatar_img }}">
         <div class="card-img-overlay d-flex flex-column justify-content-end">
             <div class=" bg-dark" style="font-size: 20px;">
                 <a href="{{ url_for('chapters', novel_id=novel.id) }}" class="text-white">{{ novel.name }}</a>

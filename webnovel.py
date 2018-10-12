@@ -195,7 +195,9 @@ def new_novel():
             author = test_form['author'],
             tag = [test_form['tag1'], test_form['tag2'], test_form['tag3']],
             introduce = test_form['introduce'],
-            chapters = []
+            chapters = [],
+            avatar_img = test_form['avatar_img'],
+            bg_img = test_form['bg_img']
         )
         new_novel.save()
           
@@ -219,6 +221,7 @@ def new_chapter(novel_id):
 
         novel = Novel.objects.with_id(novel_id)
         novel.update(push__chapters = new_chapter)
+        return redirect(url_for('upload_novel'))
 
 @app.route('/delete/<user_id>/<novel_id>')
 def delete(user_id,novel_id):

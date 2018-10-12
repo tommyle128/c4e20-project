@@ -11,7 +11,7 @@
     
 </table>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">MangaHub</a>
+        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">NovelHub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -25,25 +25,31 @@
             </div>
         </div>
     </nav>
-    <table border="1px">
-            <thead>
-                <th>STT</th>
-                <th>Truyện</th>
-                <th>Chương</th>
-                <th>Nội dung</th>
-                <th>Duyệt</th>
-            </thead>
-            <tbody>
-                {% for novel in all_novel %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ novel.name }}</td>
-                        <td>
-                            <a href="#">Sửa</a>
-                            <a href="{{ url_for('delete', novel_id=novel.id,user_id=user_id) }}">Xoá</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+    <div class="row justify-content-center">
+        <div class="col col-md-9">
+            <table border="1px">
+                <thead>
+                    <th>STT</th>
+                    <th>Truyện</th>
+                    <th>Chương</th>
+                    <th>Nội dung</th>
+                    <th>Duyệt</th>
+                </thead>
+                <tbody>
+                    {% for novel in all_novel %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ novel.name }}</td>
+                            <td>
+                                <a href="#">Sửa</a>
+                                <a href="{{ url_for('delete', novel_id=novel.id,user_id=user_id) }}">Xoá</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>    
+        </div>
+    </div>
+    
 </body>
 </html>

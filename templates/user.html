@@ -8,27 +8,31 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
-    {% include 'user/navigation.html' %} 
-    <h5>{{ user.username }}</h5>
-    <table border="1px">
-        <thead>
-            <th>STT</th>
-            <th>Truyện</th>
-            <th>Chỉnh sửa</th>
-        </thead>
-        <tbody>
-            {% for novel in all_novel %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ novel.name }}</td>
-                    <td>
-                        <a href="#">Sửa</a>
-                        <a href="{{ url_for('delete', novel_id=novel.id,user_id=user_id) }}">Xoá</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% include 'user/navigation.html' %}
+    <div class="row justify-content-center">
+        <div class="col col-md-9">
+            <h5>{{ user.username }}</h5>
+            <table border="1px">
+                <thead>
+                    <th>STT</th>
+                    <th>Truyện</th>
+                    <th>Chỉnh sửa</th>
+                </thead>
+                <tbody>
+                    {% for novel in all_novel %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ novel.name }}</td>
+                            <td>
+                                <a href="#">Sửa</a>
+                                <a href="{{ url_for('delete', novel_id=novel.id,user_id=user_id) }}">Xoá</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div> 
 </tbody>
 </table>
 </body>
