@@ -1,28 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-    <a class="navbar-brand font-lobster" href="{{ url_for('user_homepage') }}">MangaHub</a>
+    <a class="navbar-brand font-lobster" href="{{ url_for('user_homepage', user_id=user_id) }}">NovelHub</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Option
-        </button>
-        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" href="{{ url_for('new_novel') }}">Đăng truyện mới</a>
-        <a class="dropdown-item" href="{{ url_for('upload_novel') }}">Đăng chương mới</a>
-        </div>
-    </div>
+    
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link text-light" href="{{ url_for('user', user_id=user_id) }}">{{ user_name }}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-light" href="{{ url_for('search') }}">Tìm kiếm</a>
+            <a class="nav-link text-light" href="{{ url_for('user', user_id=user_id) }}">{{ user.username }}</a>
         </li> 
-        <li class="nav-item">
-            <a class="nav-link text-light" href="{{ url_for('logout') }}">Đăng xuất</a>
-        </li>       
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tuỳ chọn
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="{{ url_for('new_novel', user_id=user_id) }}">Đăng truyện mới</a>
+            <a class="dropdown-item" href="{{ url_for('logout') }}">Đăng xuất</a>
+            </div>
+        </div>
+            
         </ul>
     </div>   
 </nav>

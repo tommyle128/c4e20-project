@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Chapter Content</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
@@ -11,27 +11,21 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">NovelHub</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    {% include 'user/navigation.html' %}
     <form method="POST">
         <div class="row justify-content-center" style="background-color: rgb(243, 235, 225); height: 650px">
             <div class="col col-md-9">
-                <label>Tên đầy đủ:</label>
+                <label>Tên chương:</label>
                 <br>
                 <input type="text" name="name" placeholder="Tên chương">
                 <br>
-                <textarea name="editor1"></textarea>
+                <textarea name="editor1"></textarea><br>
                 
                 <button type="Submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
         
     </form>
-
 
 
     <script>

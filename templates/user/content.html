@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ chapter.name }}</title>
+    {% include 'metal-data.html' %}
+</head>
+<body>
+    {% include 'user/navigation.html' %}
+    <div class="row justify-content-center" style="background-color: rgb(238, 222, 203)">
+        <div class="col col-md-9">
+            <div class="text-center"> 
+                <h2>{{ chapter.name }}</h2>    
+            </div>
+            <div>
+                {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Truyện chính</a>
+                        </div>
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div> 
+                    </div>
+                    
+                {% elif chapter_id_next == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light">Truyện chính</a>
+                        </div>
+                    </div>    
+                {% elif chapter_id_previous == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light">Truyện chính</a>
+                        </div>
+                    </div>        
+                {% endif %}    
+            </div>
+            <br>
+            <div>
+                <h5>{{ chapter.content|safe }}</h5>
+                <!--!safe khong xoa va cai nay de convert html o database sang text-->    
+            </div>
+            <div>
+                {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
+                        </div>
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div> 
+                    </div>
+                    
+                {% elif chapter_id_next == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
+                        </div>
+                    </div>    
+                {% elif chapter_id_previous == "None" %}
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <a href="{{ url_for('content_user', user_id=user_id, novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters_user', user_id=user_id, novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
+                        </div>
+                    </div>        
+                {% endif %}     
+            </div>   
+        </div>    
+    </div>
+</body>
+</html>

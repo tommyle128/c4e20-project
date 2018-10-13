@@ -3,7 +3,7 @@
         <img class="card-img" style="height:100%;" src="{{ novel.avatar_img }}">
         <div class="card-img-overlay d-flex flex-column justify-content-end">
             <div class=" bg-dark" style="font-size: 20px;">
-                <a href="{{ url_for('chapters', novel_id=novel.id) }}" class="text-white">{{ novel.name }}</a>
+                <a href="{{ url_for('chapters_user', novel_id=novel.id,user_id=user_id) }}" class="text-white">{{ novel.name }}</a>
             </div>
         </div>
     </div>

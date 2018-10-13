@@ -10,19 +10,14 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">NovelHub</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    {% include 'user/navigation.html' %}
     <form method="POST">
         <div class="row justify-content-center" style="background-color: rgb(243, 235, 225); height: 650px">
             <div class="col col-md-9">
                 <div class="text-center">
                     <h3>Đăng truyện</h3>
                 </div><br>
-                <p><label>Tên truyện:</label>
+                <p><label>Tên truyện (bắt buộc):</label>
                 <br>
                 <input type="text" name="name" placeholder="Tên truyện" style="width: 304px;"></p>
                 
@@ -34,23 +29,23 @@
                 <br>
                 <input type="text" name="introduce" placeholder="Giới thiệu" style="width: 304px;"></p>
 
-                <p><label>Tag 1:</label>
+                <p><label>Thể loại 1:</label>
                 <br>
                 <input type="text" name="tag1" placeholder="Tag 1" style="width: 304px;"></p>
 
-                <p><label>Tag 2:</label>
+                <p><label>Thể loại 2:</label>
                 <br>
                 <input type="text" name="tag2" placeholder="Tag 2" style="width: 304px;"></p>
 
-                <p><label>Tag 3:</label>
+                <p><label>Thể loại 3:</label>
                 <br>
                 <input type="text" name="tag3" placeholder="Tag 3" style="width: 304px;"></p>
 
-                <p><label>Avatar Image Link:</label>
+                <p><label>Link Avatar (bắt buộc, nếu không được mời thử link khác):</label>
                 <br>
                 <input type="text" name="avatar_img" placeholder="Link" style="width: 304px;"></p>
                 
-                <p><label>Background Image Link:</label>
+                <p><label>Link Ảnh bìa (bắt buộc, nếu không được mời thử link khác):</label>
                 <br>
                 <input type="text" name="bg_img" placeholder="Link" style="width: 304px;"></p>
                 

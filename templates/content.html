@@ -8,19 +8,7 @@
     {% include 'metal-data.html' %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5">
-        <a class="navbar-brand font-lobster" href="{{ url_for('homepage') }}">NovelHub</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link text-light" href="{{ url_for('chapters', novel_id=novel_id) }}">Tất cả các chương</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    {% include 'homepage/navigation.html' %}
     <div class="row justify-content-center" style="background-color: rgb(238, 222, 203)">
         <div class="col col-md-9">
             <div class="text-center"> 
@@ -33,6 +21,9 @@
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
                         </div>
                         <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Truyện chính</a>
+                        </div>
+                        <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
                         </div> 
                     </div>
@@ -42,14 +33,19 @@
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
                         </div>
+                        <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light">Truyện chính</a>
+                        </div>
                     </div>    
                 {% elif chapter_id_previous == "None" %}
-                <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="d-flex justify-content-between">
+                        <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
-                    </div>
-                </div>        
-                
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light">Truyện chính</a>
+                        </div>
+                    </div>        
                 {% endif %}    
             </div>
             <br>
@@ -58,10 +54,13 @@
                 <!--!safe khong xoa va cai nay de convert html o database sang text-->    
             </div>
             <div>
-                    {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
+                {% if chapter_id_next != "None" and chapter_id_previous != "None" %}
                     <div class="d-flex justify-content-between">
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
                         </div>
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
@@ -73,14 +72,19 @@
                         <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_previous) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương trước</a>   
                         </div>
+                        <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
+                        </div>
                     </div>    
                 {% elif chapter_id_previous == "None" %}
-                <div class="d-flex justify-content-between">
-                    <div>
+                    <div class="d-flex justify-content-between">
+                        <div>
                             <a href="{{ url_for('content', novel_id=novel_id, chapter_id=chapter_id_next) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Chương sau</a>   
-                    </div>
-                </div>        
-                
+                        </div>
+                        <div>
+                            <a href="{{ url_for('chapters', novel_id=novel_id) }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"class="nav-link text-light"">Truyện chính</a>
+                        </div>
+                    </div>        
                 {% endif %}     
             </div>   
         </div>    
