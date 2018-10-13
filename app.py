@@ -124,8 +124,7 @@ def login():
                     all_novels = Novel.objects()
                     return render_template('user/homepage.html', user=user,all_novels=all_novels,user_id=user_id)
                 else:
-                    status = "Tài khoản không tồn tại! Hãy đăng kí tài khoản!"
-                    return render_template('signup.html', status=status)
+                    return redirect(url_for('signup'))
 
 
 @app.route('/user/<user_id>')
