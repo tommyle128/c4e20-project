@@ -106,10 +106,12 @@ def login():
         password = form['password']
 
         if username == "":
-            return "Hãy điền tên đăng nhập"
+            status = "Hãy điền tên đăng nhập"
+            return render_template('login.html', status=status)
         else:
             if password == "":
-                return "Hãy nhập mật khẩu"
+                status = "Hãy nhập mật khẩu"
+                return render_template('login.html', status=status)
             else:
                 found_user = User.objects(
                     username=username,
@@ -122,7 +124,8 @@ def login():
                     all_novels = Novel.objects()
                     return render_template('user/homepage.html', user=user,all_novels=all_novels,user_id=user_id)
                 else:
-                    return redirect(url_for('signup'))
+                    status = "Tài khoản không tồn tại! Hãy đăng kí tài khoản!"
+                    return render_template('signup.html', status=status)
 
 
 @app.route('/user/<user_id>')
@@ -156,23 +159,27 @@ def signup():
         )
 
         if email == "":
-            return "Hãy điền email của bạn"
+            status = "Hãy điền email"
+            return render_template('signup.html', status=status)
         else:
             if username == "":
-                return "Hãy điền tên đăng nhập của bạn"
+                status = "Hãy điền tên đăng nhập"
+                return render_template('signup.html', status=status)
             else:
                 if password == "":
-                    return "Hãy điền mật khẩu của bạn"
+                    status = "Hãy nhập mật khẩu"
+                    return render_template('signup.html', status=status)
                 else:
                     found_user = User.objects(
                         email=email,
                         username=username,
                     )
                     if found_user:
-                        return "Tài khoản đã tồn tại!"
+                        status = "Tài khoản đã tồn tại"
+                        return render_template('signup.html', status=status)
                     else:
                         new_user.save()
-                        return "Đã đăng kí thành công!"
+                        return render_template('user/homepage.html', user_id=new_user.id)
 
 
 @app.route('/user_homepage/<user_id>')
